@@ -1,8 +1,7 @@
 const blt = @cImport({
     @cInclude("BearLibTerminal.h");
 });
-const context = @import("context/context.zig");
-const mcontext = @import("context/mmenu_context.zig");
+const context = @import("game_context.zig");
 const std = @import("std");
 
 const print = std.debug.print;
@@ -25,8 +24,7 @@ fn closeTerm() void {
 }
 
 fn updateTerm() void {
-    var ctx: context.Context = mcontext.MMenuContext;
-    while (true) {
-        ctx = context.run();
-    }
+    var cursor = context.Cursor { .sprite="x", .x=10, .y=10};
+    var ctx = context.GameContext { .cursor=cursor };
+    ctx.run();
 }
